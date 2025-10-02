@@ -1,6 +1,8 @@
 package com.ionres.respondph.admin;
 
 import com.ionres.respondph.exception.ExceptionFactory;
+import com.ionres.respondph.util.Cryptography;
+import com.ionres.respondph.util.ObjectEncDec;
 import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -10,6 +12,9 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public List<AdminModel> getAllAdmins() {
         List<AdminModel> admins = adminDao.getAll();
+        for(AdminModel admin: admins) {
+            //Cryptography.decryptFields(admin);
+        }
         return admins;
     }
 
@@ -28,6 +33,7 @@ public class AdminServiceImpl implements AdminService{
         }
         
         admin.setHash(BCrypt.hashpw(admin.getHash(), BCrypt.gensalt()));
+        ObjectEncDec.encryptFields(admin);
         boolean flag = adminDao.save(admin);
         if (!flag) {
             throw ExceptionFactory.failedToCreate("Admin");

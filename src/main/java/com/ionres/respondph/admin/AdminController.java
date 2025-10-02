@@ -37,7 +37,7 @@ public class AdminController {
         model.setColumnIdentifiers(new String[]{"ID", "Username", "First Name", "Middle Name", "Last Name"});
 
         List<AdminModel> admins = adminService.getAllAdmins();
-
+        
         for (AdminModel admin : admins) {
             model.addRow(new Object[]{
                 admin.getId(),

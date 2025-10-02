@@ -38,9 +38,10 @@ public class LoginDAOImpl implements LoginDAO {
                     if (BCrypt.checkpw(passwordStr, hash)) {
                         admin = new AdminModel();
                         admin.setUsername(rs.getString("username"));
-                        admin.setfName(rs.getString("fname"));
-                        admin.setmName(rs.getString("mname"));
-                        admin.setlName(rs.getString("lname"));
+                        System.out.println(rs.getString("username"));
+                        admin.setfName(rs.getString("first_name"));
+                        admin.setmName(rs.getString("middle_name"));
+                        admin.setlName(rs.getString("last_name"));
                     }
                 }
             }

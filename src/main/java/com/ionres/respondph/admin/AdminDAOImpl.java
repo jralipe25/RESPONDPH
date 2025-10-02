@@ -20,9 +20,9 @@ public class AdminDAOImpl implements AdminDAO {
                     AdminModel admin = new AdminModel();
                     admin.setId(rs.getInt("admin_id"));
                     admin.setUsername(rs.getString("username"));
-                    admin.setfName(rs.getString("fname"));
-                    admin.setmName(rs.getString("mname"));
-                    admin.setlName(rs.getString("lname"));
+                    admin.setfName(rs.getString("first_name"));
+                    admin.setmName(rs.getString("middle_name"));
+                    admin.setlName(rs.getString("last_name"));
                     admins.add(admin);
                 }
             }
@@ -34,7 +34,7 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public boolean save(AdminModel admin) {
-        String query = "INSERT INTO admin (username, fname, mname, lname, hash) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO admin (username, first_name, middle_name, last_name, hash) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, admin.getUsername());
@@ -52,7 +52,7 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public boolean update(AdminModel admin) {
-        String query = "UPDATE admin SET username = ?, fname = ?, mname = ?, lname = ? WHERE admin_id = ?";
+        String query = "UPDATE admin SET username = ?, first_name = ?, middle_name = ?, last_name = ? WHERE admin_id = ?";
         try (Connection conn = DBConnection.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, admin.getUsername());
